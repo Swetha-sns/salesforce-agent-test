@@ -1,0 +1,14 @@
+.fully-booked {
+    background-color: #ffcc00; /* Yellow */
+    color: #333;
+}
+
+.non-payable {
+    background-color: #ff6666; /* Red */
+    color: white;
+}
+
+.available {
+    background-color: #66cc66; /* Green */
+    color: white;
+}

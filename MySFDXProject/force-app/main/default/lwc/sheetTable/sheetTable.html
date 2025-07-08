@@ -1,0 +1,64 @@
+<template>
+    <lightning-card title="Create New Sheet">
+        <div class="slds-p-around_medium">
+            <!-- Sheet Details -->
+            <lightning-input label="Sheet Name" value={sheetName} onchange={handleChange} data-field="Name"></lightning-input>
+            <lightning-input label="Description" value={description} onchange={handleChange} data-field="Description__c"></lightning-input>
+            
+            <!-- Dynamic Project Sheets Table -->
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                        <th>Sunday</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={sheetEntries} for:item="entry" for:index="index">
+                        <tr key={entry.id}>
+                            <!-- Project Dropdown -->
+                            <td>
+                                <lightning-combobox data-index={index} value={entry.projectId} options={projectOptions}
+                                    onchange={handleProjectChange} placeholder="Select Project">
+                                </lightning-combobox>
+                            </td>
+
+                            <!-- Weekday Input Fields -->
+                            <template for:each={entry.weekData} for:item="day">
+                                <td key={day.day}>
+                                    <lightning-input type="text" data-index={index} data-day={day.day} 
+                                        value={day.description} onchange={handleDescriptionChange} placeholder="Enter Description">
+                                    </lightning-input>
+                                </td>
+                            </template>
+
+                            <!-- Add & Remove Buttons -->
+                            <td>
+                                <lightning-button-icon icon-name="utility:add" alternative-text="Add Project"
+                                    onclick={addProject} class="slds-m-right_xx-small">
+                                </lightning-button-icon>
+
+                                <lightning-button-icon icon-name="utility:delete" alternative-text="Remove Project"
+                                    data-index={index} onclick={removeProject}>
+                                </lightning-button-icon>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+
+            <!-- Submit & Cancel Buttons -->
+            <div class="slds-m-top_medium">
+                <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+                <lightning-button variant="brand" label="Save" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

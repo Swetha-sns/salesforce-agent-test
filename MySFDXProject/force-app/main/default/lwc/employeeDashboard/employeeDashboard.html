@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Employee Dashboard" icon-name="standard:employee">
+        <template if:true={employee}>
+            <div class="slds-m-around_medium">
+                <p><strong>Name:</strong> {employee.First_Name__c} {employee.Last_Name__c}</p>
+                <p><strong>Designation:</strong> {employee.Designation__c}</p>
+                <p><strong>Email:</strong> {employee.Email__c}</p>
+                <p><strong>Phone:</strong> {employee.Phone__c}</p>
+                <p><strong>Hourly Rate:</strong> ${employee.Hourly_Rate__c}</p>
+                <p><strong>Joining Date:</strong> {employee.Joining_Date__c}</p>
+                <p><strong>Total Assigned Hours:</strong> {employee.Total_Assigned_Hours__c} hrs</p>
+                <p><strong>Total Worked Hours:</strong> {employee.Total_Worked_Hours__c} hrs</p>
+                <p><strong>Hours Worked Today:</strong> {employee.Total_Worked_Hours_Today__c} hrs</p>
+                <p><strong>Available Hours Today:</strong> {employee.Available_Hours_Today__c} hrs</p>
+                
+                <!-- Apply Dynamic CSS Class Based on Status -->
+                <p><strong>Availability Status:</strong>
+                    <lightning-badge label={employee.Availability_Status__c} class={availabilityClass}></lightning-badge>
+                </p>
+            </div>
+        </template>
+    </lightning-card>
+</template>
